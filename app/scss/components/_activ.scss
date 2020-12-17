@@ -1,0 +1,11 @@
+@use "../core" as *;
+.activ {
+  &__legend {
+    @include setTypography(h2, bold);
+    margin-bottom: $offset-small;
+  }
+
+  &__radios {
+
+  }
+}

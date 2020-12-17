@@ -1,0 +1,14 @@
+@use "../../core" as *;
+
+@mixin label($behavior-map:()) {
+  cursor: pointer;
+  display: inline-flex;
+  flex-basis: content;
+  align-items: center;
+
+  & > input:checked + * {
+    @include setBehavior($behavior-map,checked,color);
+  }
+  @include setBehavior($behavior-map);
+}
+

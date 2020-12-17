@@ -1,0 +1,27 @@
+@use "../core" as *;
+.radios {
+  @include setChildMargin($offset-small);
+
+  &__item {
+    @include setTransition;
+  }
+
+  &__label {
+    @include setTypography(p1, thin);
+  }
+
+  &__text {
+  }
+
+  &__radio {
+    margin-right: 1rem;
+    width: 1rem;
+    height: 1rem;
+  }
+
+
+  &__under-text {
+    @include setTypography(p2, grey);
+    margin-left: 2rem;
+  }
+}

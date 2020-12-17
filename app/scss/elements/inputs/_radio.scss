@@ -1,0 +1,55 @@
+@use "../../core" as *;
+//$size: 1rem  !default;
+//$background: #ffffff !default;
+//$color: #000000 !default;
+//$border-width: 1px !default;
+//$border-color: #000000 !default;
+//$border-radius: 50% !default;
+//
+//$background__hover: darken($background, 2%) !default;
+//$color__hover: #000000 !default;
+//$border-width__hover: 1px !default;
+//$border-color__hover: $border-color !default;
+//$border-radius__hover: $border-radius !default;
+//
+//$background__checked: darken($background, 7%) !default;
+//$color__checked: $color !default;
+//$border-width__checked: $border-width !default;
+//$border-color__checked: $border-color !default;
+//$border-radius__checked: $border-radius !default;
+//
+//$size-inner: 70%;
+//$background__inner: #000000 !default;
+//$color__inner: $color !default;
+//$border-width__inner: 1px !default;
+//$border-color__inner: green !default;
+//$border-radius__inner: $border-radius !default;
+
+@mixin radio($behavior-map: ()) {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid black;
+  border-radius: 50%;
+
+  &:after { //внутренний круг
+    content: '';
+    position: absolute;
+    width: 0.6rem;
+    height: 0.6rem;
+    opacity: 0;
+    background-color: #000000;
+    border-radius: 50%;
+  }
+
+  &:checked:after {
+      opacity: 1;
+
+  }
+  @include setBehavior($behavior-map);
+}
+

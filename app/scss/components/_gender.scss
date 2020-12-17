@@ -1,0 +1,15 @@
+@use "../core" as *;
+.gender {
+
+  &__label {
+    @include setTypography(h2, bold);
+    margin-bottom: 10px;
+  }
+
+  &__switcher {
+    @include setTransition();
+    @include setTypography(p2);
+    height: 3rem;
+
+  }
+}

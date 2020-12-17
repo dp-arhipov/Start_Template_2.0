@@ -1,0 +1,31 @@
+
+@mixin container($min-width:320px, $max-width:1140px, $padding-left-right: 16px, $border-width: 0px) {
+
+  min-width: $min-width + $padding-left-right*2;
+  position: relative;
+  //@if $padding-top-bottom!=null {
+  //  padding-top: $padding-top-bottom;
+  //  padding-bottom: $padding-top-bottom;
+  //}
+  //
+  //@if $padding-inner!=null {
+  //  padding-right: calc(50vw - #{$container-max-width } / 2 + #{$padding-inner});
+  //  padding-left: calc(50vw - #{$container-max-width} / 2 + #{$padding-inner});
+  //
+  //  @media (max-width: $container-max-width + $padding-left-right * 2) {
+  //    padding-right: rem($padding-left-right + $padding-inner);
+  //    padding-left: rem($padding-left-right + $padding-inner);
+  //  }
+  //
+  //} @else {
+  padding-right: calc((100% - #{$max-width}) / 2 - #{$border-width});
+  padding-left: calc((100% - #{$max-width}) / 2 - #{$border-width});
+  @media (max-width: $max-width + $padding-left-right * 2 + $border-width * 2) {
+    padding-right: $padding-left-right;
+    padding-left: $padding-left-right;
+  }
+
+  //}
+
+}
+

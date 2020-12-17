@@ -1,0 +1,362 @@
+@use "vars" as *;
+@import 'node_modules/accoutrement/sass/index';
+//@import 'node_modules/bootstrap/scss/bootstrap-reboot.scss'; // Bootstrap Reboot collection
+//@import 'node_modules/bootstrap/scss/mixins/_breakpoints.scss'; // Bootstrap Breakpoints mixin
+//@import 'node_modules/bootstrap/scss/bootstrap-grid.scss'; // Optional Bootstrap Grid
+//@import 'node_modules/bootstrap/scss/bootstrap.scss'; // Optional Bootstrap Grid
+//@import 'node_modules/bootstrap/scss/utilities/_sizing.scss'; // Optional Bootstrap Utilites
+
+//utils
+//atom
+//molecula
+//organism
+//
+
+//отладка
+@mixin borderAll {
+  & > * {
+    outline: 1px solid deeppink;
+  }
+  & > * > * {
+    outline: 1px dashed #4aa88b;
+    outline-offset: -1px;
+  }
+  & > * > * > * {
+    outline: 1px dotted dodgerblue;
+    outline-offset: -1px;
+  }
+  & > * > * > * > * {
+    outline: 1px dotted #741eff;
+    outline-offset: -1px;
+  }
+  & > * > * > * > * > * {
+    outline: 1px dotted #ff1ec7;
+    outline-offset: -1px;
+  }
+
+  & > * > * > * > * > * > * {
+    outline: 1px dotted #1e29ff;
+    outline-offset: -1px;
+  }
+
+  & > * > * > * > * > * > * > * {
+    outline: 1px dotted #db0d67;
+    outline-offset: -1px;
+  }
+}
+
+@mixin colorAll {
+  background-color: #ffc0c0;
+  & > * {
+    background-color: #ffe1c0;
+  }
+  & > * > * {
+    background-color: #b9fcc4;
+  }
+  & > * > * > * {
+    background-color: #88a6ff;
+  }
+  & > * > * > * > * {
+    background-color: #bffab5;
+  }
+  & > * > * > * > * > * {
+    background-color: #b288ff;
+  }
+  & > * > * > * > * > * > * {
+    background-color: #ffc588;
+  }
+}
+
+
+////настройки стилей
+//переходы
+@mixin setTransition($duration: $transition-duration, $type: $transition-type) {
+  &, * {
+    transition: all $duration $type;
+
+    &:before, &:after, &::placeholder {
+      transition: all $duration $type;
+    }
+  }
+}
+
+//адаптивный шрифт
+@mixin setFluidFontSize($f-min:$min-font-size, $f-max:$max-font-size, $w-min:$min-content-width, $w-max:$max-content-width) {
+  font-size: $f-min;
+
+  @media (min-width: $w-min) {
+    $k: ($f-max - $f-min)/($w-max - $w-min);
+    $b: $f-min - $k * $w-min;
+    font-size: calc(#{$k} * 100vw + #{$b});
+  }
+
+  @media (min-width: $w-max) {
+    font-size: $f-max;
+  }
+}
+
+//установка стилей из $font-styles
+@mixin setTypography($tag,$mods...) {
+  $tag-styles: map-get($font-styles, $tag);
+  @if $tag-styles {
+    @each $name, $style in $tag-styles {
+      #{$name}: $style;
+    }
+    @each $mod in $mods {
+      @include setTypography("-"+$mod);
+    }
+  } @else {
+    @warn "No style for " + $tag;
+  }
+}
+
+
+//медиа
+@mixin mq($breakpointName: md) {
+  @media screen and (max-width: #{map.get($grid-breakpoints, $breakpointName)}) {
+    @content;
+  }
+}
+
+//создание переменных css из параметров
+@mixin token--($name, $value) {
+  $name: -- + $name;
+  $name: unquote($name);
+  #{$name}: $value;
+}
+
+//margin-bottom между элементами контейнера
+@mixin setChildMargin($value: 1rem, $where: bottom) {
+  //для контейнера
+  > * {
+    margin-#{$where}: $value;
+  }
+  > :last-child {
+    margin-#{$where}: 0;
+  }
+  //если для элементов
+  //&+&{
+  //  margin-top: 70px;
+  //}
+}
+
+
+//полезные ускорялки верстки
+@mixin flex($position:center) {
+  display: flex;
+  align-items: center;
+  justify-content: $position;
+}
+
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+
+////конвертеры
+@function rem($value, $context:$rem) {
+  $unit: unit($value);
+  @if type-of($value) == "number" {
+    $value: strip-unit($value);
+    @if ($unit == "rem" or $unit=="") {
+      @return $value * 1rem;
+    } @else if ($unit == "px") {
+      $context: strip-unit($context);
+      @return $value / $context * 1rem;
+    }
+  }
+  @warn "Unknown type " + $unit;
+  @return null;
+}
+
+//удаление unit из значения
+@function strip-unit($number) {
+  @if not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+  @return $number;
+}
+
+//удаление пробелов в начале и конце строки
+@function stripStr($str) {
+  @while (str-index($str, ' ') != null) {
+    $index: str-index($str, ' ');
+    $str: "#{str-slice($str, 0, $index - 1)}#{str-slice($str, $index + 1)}";
+  }
+  @return $str;
+}
+
+//операторы
+@function add($value1, $value2, $return-calc: true) {
+  @if $value1 == null {
+    @return $value2;
+  }
+
+  @if $value2 == null {
+    @return $value1;
+  }
+
+  @if type-of($value1) == number and type-of($value2) == number and comparable($value1, $value2) {
+    @return $value1 + $value2;
+  }
+
+  @return if($return-calc == true, calc(#{$value1} + #{$value2}), $value1 + unquote(" + ") + $value2);
+}
+
+@function subtract($value1, $value2, $return-calc: true) {
+  @if $value1 == null and $value2 == null {
+    @return null;
+  }
+
+  @if $value1 == null {
+    @return -$value2;
+  }
+
+  @if $value2 == null {
+    @return $value1;
+  }
+
+  @if type-of($value1) == number and type-of($value2) == number and comparable($value1, $value2) {
+    @return $value1 - $value2;
+  }
+
+  @return if($return-calc == true, calc(#{$value1} - #{$value2}), $value1 + unquote(" - ") + $value2);
+}
+
+
+//работа с цветом
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+
+@mixin font($fname, $fstyle, $fweight, $furl) {
+  @font-face {
+    font-family: $fname;
+    font-style: $fstyle;
+    font-weight: $fweight;
+    // font-display: swap; // Uncomment to initially display system fonts
+    src: local($fname), url($furl) format('woff2');
+  }
+}
+
+//@include font('Roboto', normal, 400, '../fonts/roboto-regular-webfont.woff2');
+//@include font('Roboto', italic, 400, '../fonts/roboto-italic-webfont.woff2');
+//@include font('Roboto', normal, 700, '../fonts/roboto-bold-webfont.woff2');
+//@include font('Roboto', italic, 700, '../fonts/roboto-bolditalic-webfont.woff2');
+
+
+
+
+
+
+@mixin setBehavior($map:(),$state:none,$props...) {
+  @if $map!=() {
+    //@debug $state;
+    @if type-of(map-get($map, $state))=="map" {
+      $map: map-get($map, $state);
+
+      @if $props!=null {
+        $temp: ();
+        @each $prop in $props {
+          $value: map-get($map, $prop);
+          @if $value!=null {
+            $temp: map-merge($temp, ($prop: $value));
+          }
+        }
+        $map: $temp;
+        @debug $map;
+      }
+    }
+    @each $key, $value in $map {
+      @if type_of($value)=="map" {
+        @if $key==default {
+          @include setBehavior($value)
+
+        } @else if $key=="placeholder" {
+          &::#{$key} {
+            @include setBehavior($value)
+          }
+
+        } @else {
+          &:#{$key} {
+            @include setBehavior($value)
+          }
+        }
+      } @else if ($value!=()) {
+        #{$key}: $value;
+      }
+    }
+
+  }
+}
+
+//
+//@mixin setSettings($map:(),$state:none,$property:none) {
+//  @if $map!=() {
+//    @if $state!=none {
+//      $map: map-get($map, $state);
+//      @if $property!=none {
+//        $map: ($property:map-get($map, $property));
+//      }
+//    }
+//    @each $key, $value in $map {
+//      @if type_of($value)=="map" {
+//        @if $key==default {
+//          @include setBehavior($value)
+//
+//        } @else if $key=="placeholder" {
+//          &::#{$key} {
+//            @include setBehavior($value)
+//          }
+//
+//        } @else {
+//          &:#{$key} {
+//            @include setBehavior($value)
+//          }
+//        }
+//      } @else if ($value!=()) {
+//        //#{$key}: $value;
+//        @include token--($key, $value);
+//      }
+//    }
+//  }
+//}
+//
+//@mixin makeChangeble($map:(),$state:none,$property:none) {
+//  @if $map!=() {
+//    @if $state!=none {
+//      $map: map-get($map, $state);
+//      @if $property!=none {
+//        $map: ($property:map-get($map, $property));
+//      }
+//    }
+//    @each $key, $value in $map {
+//      @if type_of($value)=="map" {
+//        @if $key==default {
+//          @include makeChangeble($value)
+//
+//        } @else if $key=="placeholder" {
+//          &::#{$key} {
+//            @include makeChangeble($value)
+//          }
+//
+//        } @else {
+//          &:#{$key} {
+//            @include makeChangeble($value)
+//          }
+//        }
+//      } @else if ($value!=()) {
+//        //#{$key}: $value;
+//        #{$key}: var(-- + $key);
+//
+//      }
+//    }
+//  }
+//}
+//

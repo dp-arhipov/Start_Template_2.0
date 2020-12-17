@@ -1,0 +1,68 @@
+@use "../../core" as *;
+
+//$padding: 1rem 2rem !default;
+//$background: #000000 !default;
+//$color: #ffffff !default;
+//$border-width: 1px !default;
+//$border-color: $background !default;
+//$border-radius: 4px !default;
+//
+//$padding__hover: $padding 32px !default;
+//$background__hover: lighten($background, 20%) !default;
+//$color__hover: $color !default;
+//$border-width__hover: $border-width !default;
+//$border-color__hover: $border-color !default;
+//$border-radius__hover: $border-radius !default;
+//
+//$background__active: lighten($background, 20%) !default;
+//$color__active: $color !default;
+//$border-width__active: $border-width !default;
+//$border-color__active: $border-color !default;
+//$border-radius__active: $border-radius !default;
+
+
+//.btn {
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  align-self: center;
+//  cursor: pointer;
+//  padding: $padding;
+//  border-style: solid;
+//  border-radius: $border-radius;
+//  border-color: $border-color;
+//  border-width: $border-width;
+//  background: $background;
+//  color: $color;
+//
+//  &:active {
+//    border-radius: $border-radius__active;
+//    border-color: $border-color__active;
+//    border-width: $border-width__active;
+//    background: $background__active;
+//  }
+//
+//  &:hover {
+//    border-radius: $border-radius__hover;
+//    border-color: $border-color__hover;
+//    border-width: $border-width__hover;
+//    background: $background__hover;
+//    color: $color__hover;
+//  }
+//
+//  &.-small {
+//    padding: 1rem 1rem;
+//  }
+//}
+
+@mixin button($behavior-map:()){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 1rem 2rem;
+  background-color: #c6c6c6;
+  @include setBehavior($behavior-map);
+}

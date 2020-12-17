@@ -1,0 +1,9 @@
+@use "../core" as *;
+
+
+.buttons {
+  @include setTypography(p1);
+  display: flex;
+  justify-content: space-between;
+
+}

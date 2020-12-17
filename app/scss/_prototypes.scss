@@ -1,0 +1,438 @@
+
+@mixin container($min-w:320px, $max-w: 1180px, $paddingLR: 16px, $w-border:0px, $paddingInner:null, $paddingTB:null) { //ширина контента, отступ, отступ внутри блока контента, отступ сверху и снизу
+  min-width: $min-w;
+  position: relative;
+  @if $paddingTB!=null {
+    padding-top: $paddingTB;
+    padding-bottom: $paddingTB;
+  }
+
+  @if $paddingInner!=null {
+    padding-right: calc(50vw - #{$max-w } / 2 + #{$paddingInner});
+    padding-left: calc(50vw - #{$max-w} / 2 + #{$paddingInner});
+
+    @media (max-width: $max-w + $paddingLR * 2) {
+      padding-right: rem($paddingLR + $paddingInner);
+      padding-left: rem($paddingLR + $paddingInner);
+    }
+
+  } @else {
+
+    padding-right: calc(50vw - #{$max-w } / 2 + #{$w-border});
+    padding-left: calc(50vw - #{$max-w} / 2 + #{$w-border});
+    ////rem($max-w) + rem($paddingLR * 2);
+    @media (max-width: $max-w + $paddingLR * 2) {
+      padding-right: rem($paddingLR);
+      padding-left: rem($paddingLR);
+
+    }
+  }
+}
+
+@mixin scrollBar($width: 20px, $thumb-color: #c7c7c7, $track-color: #e3e3e3) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+    //border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: 5px;
+  }
+}
+
+@mixin input-radio($size: 1rem, $c-bg: transparent, $c-border: grey, $w-border: 1px, $size-inner: 1rem, $c-bg-ch: grey, $c-border-ch: grey, $w-border-сh: 1px) {
+  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: $size;
+  height: $size;
+  border: $w-border solid $c-border;
+  border-radius: 50%;
+  background: $c-bg;
+  &:after { //внутренний круг
+    content: '';
+    position: absolute;
+    width: $size-inner;
+    height: $size-inner;
+    border-radius: 50%;
+    background: $c-bg-ch;
+    opacity: 0;
+  }
+
+  &:checked { //чекбокс выбран
+    border-color: $c-border-ch;
+    border-width: $w-border-сh;
+
+    &:after {
+      opacity: 1;
+      //width: $size-inner;
+      //height: $size-inner;
+    }
+  }
+}
+
+@mixin btn($c-bg: #e0e0e0, $c-text: #d02727, $c-border: #a0a0a0, $p-text: 16px 32px, $w-border:1px, $r-border:3px) {
+  padding: $p-text;
+  border-radius: $r-border;
+  border: $w-border solid $c-border;
+  background-color: $c-bg;
+  align-self: center;
+  color: $c-text;
+  cursor: pointer;
+}
+
+@mixin link($c-text, $c-text-v, $c-text-h, $c-text-a) {
+  & {
+    color: $c-text;
+
+    &:visited {
+      color: $c-text-v;
+    }
+
+    &:hover {
+      color: $c-text-h;
+    }
+
+    &:active, &:focus {
+      color: $c-text-a;
+    }
+  }
+}
+
+@mixin burgerMenu($height:20px, $width:30px, $w-stripes:2px) {
+  //в html нужен вложенный .burger__stripes
+  z-index: 10;
+  $distance: ($height - $w-stripes * 3 )/2+$w-stripes;
+  width: $width;
+  height: $height;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  position: relative;
+
+  :first-child {
+    top: $height/2-$w-stripes/2;
+
+    &, &:before, &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      left: 0;
+      height: $w-stripes;
+      background-color: #000;
+      border-radius: 5px;
+    }
+
+    &:before { //верхняя палочка
+      bottom: $distance;
+    }
+
+    &:after { //нижняя палочка
+      top: $distance;
+
+    }
+
+  }
+  &.-active {
+    :first-child {
+      background-color: transparent;
+      transition: none; //средняя палочка
+
+
+      &:before { //верхняя палочка
+        transform: rotate(-45deg);
+        bottom: 0px;
+      }
+
+      &:after { //нижняя палочка
+        transform: rotate(45deg);
+        top: 0px;
+
+      }
+    }
+  }
+  //
+  //
+  //&__stripes {
+  //  top: $height/2-$w-stripes/2;
+  //
+  //  &, &:before, &:after { //все палочки
+  //    content: "";
+  //    position: absolute;
+  //    width: 100%;
+  //    left: 0;
+  //    height: $w-stripes;
+  //    background-color: #000;
+  //    border-radius: 5px;
+  //  }
+  //
+  //  &:before { //верхняя палочка
+  //    bottom: $distance;
+  //
+  //    .-active & { //поворот верхней палочки
+  //      transform: rotate(-45deg);
+  //      bottom: 0px;
+  //    }
+  //  }
+  //
+  //  &:after { //нижняя палочка
+  //    top: $distance;
+  //
+  //    .-active & { //поворот нижней палочки
+  //      transform: rotate(45deg);
+  //      top: 0px;
+  //    }
+  //  }
+  //
+  //  .-active & { //удаление средней палочки
+  //    background-color: transparent;
+  //    transition: none; //средняя палочка
+  //  }
+  //}
+}
+
+@mixin slider-menu($direction: 'x', $c-bg: grey) {
+  z-index: 9;
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: $c-bg;
+  right: 0;
+  @if ($direction == 'y') {
+    bottom: 0;
+    margin-bottom: 100%;
+  } @else if ($direction == 'x') {
+    top: 0;
+    margin-right: 100%;
+  }
+
+  &.-active {
+
+    @if ($direction == 'y') {
+      margin-bottom: 0;
+    } @else if ($direction == 'x') {
+      margin-right: 0;
+    }
+  }
+}
+
+@mixin label($c-text:black, $c-text-ch:black) {
+  cursor: pointer;
+  display: inline-flex;
+  flex-basis: content;
+  align-items: center;
+  color: $c-text;
+  & > input:checked + *,
+  &:hover {
+    color: $c-text-ch;
+  }
+}
+
+@mixin input-text($w: 100%, $h:100%, $p: 0.6rem, $w-border:1px, $r-border:4px,$c-text:initial,$c-border:#c6c6c6,$c-placeholder:#9c9c9c, $c-text-h:inherit,$c-border-h:#9a9a9a) {
+  width: $w;
+  height: $h;
+  padding: $p;
+  color: $c-text;
+  text-align: center;
+  border: $w-border solid $c-border;
+  border-radius: $r-border;
+
+  &::placeholder {
+    color: $c-placeholder;
+  }
+
+  &:hover, &:focus {
+    color: $c-text-h;
+    border-color: $c-border-h;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
+
+@mixin input-switcher($c-bg:white, $c-text:black, $c-border:black, $r-border: 4px, $w-border: 1px,$c-bg-ch:black, $c-text-ch:white, $c-border-ch:black) {
+  display: flex;
+  & > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+
+    &:first-of-type input {
+      border-top-left-radius: $r-border;
+      border-bottom-left-radius: $r-border;
+    }
+
+    &:last-of-type input {
+      border-top-right-radius: $r-border;
+      border-bottom-right-radius: $r-border;
+    }
+  }
+
+  input {
+    appearance: none;
+    flex-grow: 1;
+    min-height: 2rem;
+    height: 100%;
+    background-color: $c-bg;
+    border: $w-border solid $c-border;
+    color: $c-text;
+
+    &:checked {
+      background-color: $c-bg-ch;
+      border: $w-border solid $c-border-ch;
+    }
+  }
+
+  input:checked + * {
+    color: $c-text-ch;
+  }
+
+  &__text {
+    position: absolute;
+  }
+
+}
+
+@mixin input-checkbox {
+  appearance: none;
+  border: 2px solid #e5e5e5;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:after {
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    content: "\f00c";
+    font-size: 0.8rem;
+    opacity: 0;
+    color: #ffffff;
+  }
+  &:checked {
+    background-color: $c-form-elems-checked;
+    border-color: $c-form-elems-checked;
+
+    &:after {
+      opacity: 1;
+      //transform: scale(.6);
+    }
+  }
+}
+
+.container {
+  @include container($min-content-width, $max-content-width, $container-padding);
+}
+
+.slider-menu {
+  @include slider-menu();
+}
+
+.burger {
+  @include burgerMenu();
+}
+
+.btn {
+
+  @include btn();
+  &:hover {
+    @include btn($c-btn-hover, $c-text-white, $c-text-white, 20px 24px, 0, 4px);
+  }
+}
+
+
+
+.btn {
+  $c-bg: #e0e0e0;
+  $c-text: #d02727;
+  $c-border: #a0a0a0;
+  $p-text: 16px 32px;
+  $w-border: 1px;
+  $r-border: 3px;
+
+
+  padding: $p-text;
+  border-radius: $r-border;
+  border: $w-border solid $c-border;
+  background-color: $c-bg;
+  color: $c-text;
+  cursor: pointer;
+  //@include u-setElementStyles(btn);
+}
+
+
+.link {
+  @include link(black, #931919, #5f5f5f, #959595,);
+}
+
+.radio {
+  @include input-radio(1rem, $cc-main-white, $c-form-elems, 2px, 0.5rem, $c-form-elems-checked, $c-form-elems-checked, 2px);
+}
+
+.label {
+  @include label($c-text-black, $c-form-elems-checked);
+}
+
+.text-input {
+  @include input-text(100px, 100%, 0.6rem, 1px, $radius-small);
+}
+
+.switcher {
+
+  @include input-switcher($c-switcher, $c-text-black, $c-border-ch, $radius-small, 1px, $c-switcher-ch, $c-text-white, $c-border-ch);
+}
+
+
+.checkbox {
+  @include a-input-checkbox();
+}
+
+
+
+
+
+.checkbox {
+  appearance: none;
+  border: 2px solid #e5e5e5;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:after {
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    content: "\f00c";
+    font-size: 0.8rem;
+    opacity: 0;
+    color: #ffffff;
+  }
+  &:checked {
+    background-color: $c-form-elems-checked;
+    border-color: $c-form-elems-checked;
+
+    &:after {
+      opacity: 1;
+      //transform: scale(.6);
+    }
+  }
+
+  &.-dark{
+    border-color: #000;
+  }
+}
+
+*/

@@ -1,0 +1,91 @@
+@use "../../core" as *;
+
+//$content: "\f00c" !default;
+//$font_size: 0.8rem !default;
+//$size: 1rem !default;
+//
+//$background: #ffffff !default;
+//$color: #000000 !default;
+//$border-width: 1px !default;
+//$border-color: black !default;
+//$border-radius: 1px !default;
+//
+//$background__hover: $background !default;
+//$color__hover: $color !default;
+//$border-width__hover: 1px !default;
+//$border-color__hover: #000000 !default;
+//$border-radius__hover: $border-radius !default;
+//
+//$background__checked: darken($background, 7%) !default;
+//$color__checked: $color !default;
+//$border-width__checked: 1px !default;
+//$border-color__checked: #000000 !default;
+//$border-radius__checked: $border-radius !default;
+
+//.checkbox2 {
+//  appearance: none;
+//  width: $size;
+//  height: $size;
+//  display: flex;
+//  align-items: center;
+//  justify-content: center;
+//  background: $background;
+//  color: $color;
+//  border-style: solid;
+//  border-width: $border-width;
+//  border-color: $border-color;
+//  border-radius: $border-radius;
+//
+//  &:after {
+//    content: $content;
+//    position: absolute;
+//    font-family: "Font Awesome 5 Free";
+//    font-weight: 700;
+//    font-size: $font_size;
+//    opacity: 0;
+//  }
+//  &:hover {
+//    background: $background__hover;
+//    border-width: $border-width__hover;
+//    border-color: $border-color__hover;
+//    border-radius: $border-radius__hover;
+//    color: $color__hover;
+//  }
+//
+//  &:checked {
+//    border-width: $border-width__checked;
+//    border-color: $border-color__checked;
+//    border-radius: $border-radius__checked;
+//    color: $color__checked;
+//
+//    &:after {
+//      opacity: 1;
+//      //transform: scale(.6);
+//    }
+//  }
+//}
+
+
+@mixin checkbox($behavior-map:()) {
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  &:after {
+    content: "\f00c";
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 700;
+    font-size: 0.7rem;
+    opacity: 0;
+  }
+  &:checked:after {
+      opacity: 1;
+      //transform: scale(.6);
+    }
+  @include setBehavior($behavior-map);
+}
+

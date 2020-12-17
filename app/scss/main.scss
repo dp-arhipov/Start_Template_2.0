@@ -1,0 +1,134 @@
+@use "core" as *;
+@use "elements" as *;
+@use "components" as *;
+
+html {
+  //@include setFluidFontSize();
+  @include setTypography(html);
+}
+
+//.counter {
+//  padding-top: $offset-xxlarge;
+//
+//
+//  &__title {
+//    @include setTextStyles(h1, bold);
+//    margin-bottom: $offset-medium;
+//  }
+//
+//  &__form {
+//
+//  }
+//}
+//
+//.form {
+//
+//  //padding: $xxlarge $large;
+//  @include childMargin(60px, bottom);
+//  border-radius: 16px;
+//  background-color: #b1b1b1;
+//  padding: $offset-large $offset-medium;
+//
+//  &__item {
+//
+//  }
+//
+//}
+//
+//
+//.gender {
+//
+//  &__label {
+//    @include setTextStyles(h2, bold);
+//    margin-bottom: 10px;
+//  }
+//
+//  &__switcher {
+//    @include setTransition();
+//    @include setTextStyles(p2);
+//    height: 3rem;
+//
+//  }
+//}
+//
+//.params {
+//  display: grid;
+//  grid-template-columns: 1fr 1fr 0fr;
+//  //display: flex;
+//  //justify-content: space-between;
+//  @include setTransition();
+//
+//  &__block {
+//
+//  }
+//
+//  &__header {
+//    @include flex(right);
+//  }
+//
+//  &__label {
+//    @include setTextStyles(h2, bold);
+//    margin-bottom: 10px;
+//    cursor: pointer;
+//    margin-right: $offset-xs;
+//  }
+//
+//  &__unit {
+//    @include setTextStyles(p3, grey);
+//  }
+//
+//  &__input {
+//    @include setTextStyles(p2);
+//    width: 80px;
+//  }
+//}
+//
+////.activ {
+////  &__legend {
+////    @include setTextStyles(h2, bold);
+////    margin-bottom: $offset-small;
+////  }
+////
+////  &__radios {
+////
+////  }
+////}
+//
+//.radios {
+//  @include childMargin($offset-small);
+//
+//  &__item {
+//    @include setTransition;
+//  }
+//
+//  &__label {
+//    @include setTextStyles(p1, thin);
+//  }
+//
+//  &__text {
+//  }
+//
+//  &__radio {
+//    margin-right: 1rem;
+//    width: 1rem;
+//    height: 1rem;
+//  }
+//
+//
+//  &__under-text {
+//    @include setTextStyles(p2, grey);
+//    margin-left: 2rem;
+//  }
+//}
+//
+//
+//.buttons {
+//  @include setTextStyles(p1);
+//  display: flex;
+//  justify-content: space-between;
+//}
+
+//.btn{
+//  @include cc.a-btn();
+//}
+

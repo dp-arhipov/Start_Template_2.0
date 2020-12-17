@@ -1,0 +1,57 @@
+html {
+  & * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: inherit;
+
+    &:after, &:before {
+      //content: '';
+      content: none;
+      display: block;
+      box-sizing: border-box
+    }
+  }
+
+  a, a:hover {
+    //display: inline-block;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    outline: none;
+    all: inherit;
+    //font-size: inherit;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  input:focus, input:hover, input {
+    outline: none;
+  }
+
+  input[type='radio'], input[type='checkbox'] {
+    cursor: pointer;
+  }
+
+  fieldset {
+    border: none;
+  }
+
+  img {
+    display: block;
+  }
+
+  label {
+    //display: inline-block;
+    cursor: pointer;
+  }
+
+  .no-scroll {
+    overflow: hidden;
+  }
+
+}

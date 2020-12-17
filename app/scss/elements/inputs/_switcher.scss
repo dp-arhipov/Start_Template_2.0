@@ -1,0 +1,63 @@
+@use "../../core" as *;
+//$height: 3rem !default;
+//$background: #ffffff !default;
+//$color: #ffffff !default;
+//$border-width: 1px !default;
+//$border-color: #000000 !default;
+//$border-radius: 4px !default;
+//
+//$background__checked: darken($background, 100%) !default;
+//$color__checked: $color !default;
+//$border-width__checked: $border-width !default;
+//$border-color__checked: $border-color !default;
+//$border-radius__checked: $border-radius !default;
+
+@mixin switcher($behavior-map:()) {
+  display: flex;
+  //overflow: hidden;
+  border: 1px solid black;
+
+  @include setBehavior($behavior-map, default);
+
+  & > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+
+    //@include setBehavior($behavior-map,default);
+    //&:first-of-type input {
+    //  border-radius: $border-radius 0 0 $border-radius;
+    //}
+    //&:last-of-type input {
+    //  border-radius:0 $border-radius $border-radius 0;
+    //}
+  }
+
+  input {
+    appearance: none;
+    flex-grow: 1;
+    min-height: 2rem;
+    height: 100%;
+
+    &:checked {
+
+      background-color: black;
+
+      @include setBehavior($behavior-map, checked, background-color);
+    }
+  }
+
+  input:checked + * {
+    color: white;
+    @include setBehavior($behavior-map, checked, color, font-size);
+  }
+
+  input + * {
+    position: absolute;
+    @include setBehavior($behavior-map, default, color);
+  }
+
+}
+
+

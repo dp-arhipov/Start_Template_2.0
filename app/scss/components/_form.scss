@@ -1,0 +1,14 @@
+@use "../core" as *;
+.form {
+
+  //padding: $xxlarge $large;
+  @include setChildMargin(60px, bottom);
+  border-radius: 16px;
+  background-color: #b1b1b1;
+  padding: $offset-large $offset-medium;
+
+  &__item {
+
+  }
+
+}

@@ -1,0 +1,6 @@
+@use "../core" as *;
+@mixin link($behavior-map:()) {
+  @include setBehavior($behavior-map);
+}
+
+

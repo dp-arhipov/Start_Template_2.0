@@ -1,0 +1,15 @@
+@use "../core" as *;
+
+.counter {
+  padding-top: $offset-xxlarge;
+
+
+  &__title {
+    @include setTypography(h1, bold);
+    margin-bottom: $offset-medium;
+  }
+
+  &__form {
+
+  }
+}

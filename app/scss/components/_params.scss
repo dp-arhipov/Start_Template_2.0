@@ -1,0 +1,32 @@
+@use "../core" as *;
+.params {
+  display: grid;
+  grid-template-columns: 1fr 1fr 0fr;
+  //display: flex;
+  //justify-content: space-between;
+  @include setTransition();
+
+  &__block {
+
+  }
+
+  &__header {
+    @include flex(left);
+  }
+
+  &__label {
+    @include setTypography(h2, bold);
+    margin-bottom: 10px;
+    cursor: pointer;
+    margin-right: $offset-xs;
+  }
+
+  &__unit {
+    @include setTypography(p3, grey);
+  }
+
+  &__input {
+    @include setTypography(p2);
+    width: 80px;
+  }
+}

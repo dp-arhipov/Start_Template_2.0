@@ -1,0 +1,53 @@
+@mixin burger($height:20px,$width:30px,$stripes-height:2px, $color: black){
+  z-index: 10;
+  $distance: ($height - $stripes-height * 3 )/2+$stripes-height;
+  width: $width;
+  height: $height;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  position: relative;
+
+  :first-child {
+    top: $height/2-$stripes-height/2;
+
+    &, &:before, &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      left: 0;
+      height: $stripes-height;
+      background-color: $color;
+      border-radius: 5px;
+    }
+
+    &:before { //верхняя палочка
+      bottom: $distance;
+    }
+
+    &:after { //нижняя палочка
+      top: $distance;
+
+    }
+
+  }
+  &.-active {
+    :first-child {
+      background-color: transparent;
+      transition: none; //средняя палочка
+
+
+      &:before { //верхняя палочка
+        transform: rotate(-45deg);
+        bottom: 0px;
+      }
+
+      &:after { //нижняя палочка
+        transform: rotate(45deg);
+        top: 0px;
+
+      }
+    }
+  }
+}
+

@@ -1,0 +1,57 @@
+@use "../core" as *;
+
+//components imports
+@use "container" as *;
+@use "burger" as *;
+@use "slider-menu" as *;
+@use "link" as *;
+@use "inputs/button" as *;
+@use "inputs/checkbox" as *;
+@use "inputs/radio" as *;
+@use "inputs/text-field" as *;
+@use "inputs/switcher" as *;
+@use "inputs/label" as *;
+
+//components config
+
+.container {
+  @include container($min-content-width, $max-content-width, $content-padding);
+}
+
+
+.btn {
+  @include button();
+}
+
+.checkbox {
+  @include checkbox();
+}
+
+.label {
+  @include label();
+}
+
+.radio {
+  @include radio()
+
+}
+
+.switcher {
+  @include switcher();
+}
+
+.text-input {
+  @include text-field();
+}
+
+.burger {
+  @include burger();
+}
+
+.link {
+  @include link();
+}
+
+.slider-menu {
+  @include slider-menu();
+}

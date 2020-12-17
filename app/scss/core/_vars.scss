@@ -1,0 +1,103 @@
+//цвета
+$c-primary: #000000;
+$c-secondary: #ffffff;
+$c-accent: #fd7d36;
+
+$c-surface: #fd7d36;
+$c-surface-inactive: #dcdcdc;
+//$c-background: #ffffff;
+$c-text-primary: $c-primary;
+$c-text-secondary: #bdbdbf;
+$c-text-checked: $c-accent;
+$c-text-placeholder: #7b7b7b;
+
+
+//размеры
+$rem: 16px;
+$min-content-width: 560px;
+$max-content-width: 560px;
+$content-padding: 16px;
+$radius-small: 4px;
+$radius-large: 16px;
+
+
+//отступы
+$offset-xxs: 4px;
+$offset-xs: 8px;
+$offset-small: 16px;
+$offset-medium: 24px;
+$offset-large: 32px;
+$offset-xxlarge: 40px;
+
+
+//анимация
+$transition-duration: 0.2s;
+$transition-type: ease;
+
+
+//медиа
+$grid-breakpoints: (
+        xs: 370px,
+        sm: 480px,
+        md: 768px,
+        lg: 992px,
+        xl: 1180px
+);
+
+
+//шрифты
+$max-font-size: 16px;
+$min-font-size: 16px;
+$font-styles: (
+        html:(
+                line-height: 1.6,
+                font-family: ('PT Sans Caption', Arial, sans-serif)
+        ),
+        h1:(
+                font-size: 64px,
+                line-height: 83px
+        ),
+        h2:(
+                font-size: 32px,
+                line-height: 41px
+        ),
+        h3:(
+                font-size: 24px,
+                line-height: 1.6
+        ),
+        p1:(
+                font-size: 20px,
+                line-height: 26px
+        ),
+        p2:(
+                font-size: 18px,
+                line-height: 30px
+        ),
+        p3:(
+                font-size: 16px,
+                line-height: 1.1
+        ),
+  //mods
+        -bold: (
+                font-weight: 700
+        ),
+        -normal: (
+                font-weight: normal
+        ),
+        -thin: (
+                font-weight: 300
+        ),
+        -grey:(
+                color:#d0d0d0
+        )
+);
+//
+//
+//$button: (
+//        default:(
+//                background-color: blue
+//        ),
+//        hover:(
+//                background-color: #ae1bbf
+//        )
+//)

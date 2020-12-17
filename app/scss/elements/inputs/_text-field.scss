@@ -1,0 +1,46 @@
+@use "../../core" as *;
+//
+//$width: 1fr  !default;
+//$height:1fr  !default;
+//$padding: 0.6rem  !default;
+//$background: #ffffff !default;
+//$color: #000000 !default;
+//$border-width: 1px !default;
+//$border-color: black !default;
+//$border-radius: 4px !default;
+//$placeholder-color:grey !default;
+//
+//$background__hover: darken($background, 3%) !default;
+//$color__hover: $color !default;
+//$border-width__hover: $border-width !default;
+//$border-color__hover: $border-color !default;
+//$border-radius__hover: $border-radius !default;
+//
+//$background__focus: darken($background, 3%) !default;
+//$color__focus: $color !default;
+//$border-width__focus: $border-width !default;
+//$border-color__focus: $border-color__hover!default;
+//$border-radius__focus: $border-radius !default;
+//
+//$background__active: darken($background, 3%) !default;
+//$color__active: $color !default;
+//$border-width__active: $border-width !default;
+//$border-color__active: $border-color__hover !default;
+//$border-radius__active: $border-radius !default;
+
+@mixin text-field($behavior-map:()){
+  width: 100%;
+  height: 1fr;
+  padding: 0.6rem;
+  text-align: center;
+  border: 1px solid black;
+  &::placeholder {
+    color: #b3b3b3;
+  }
+  &:focus::placeholder {
+    color: transparent;
+  }
+  @include setBehavior($behavior-map);
+}
+
+

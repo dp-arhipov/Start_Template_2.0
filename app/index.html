@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <title>Счётчик каллорий</title>
+    <meta name="description" content="Startup HTML template OptimizedHTML 5">
+    <meta name="viewport" content="width=device-width">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"><meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="images/favicon.png">
+    <meta property="og:image" content="images/dest/preview.jpg">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Caption:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="css/app.min.css">
+</head>
+<body>
+<main class="counter container">
+
+    <h1 class="counter__title">Счётчик калорий</h1>
+    <form class="counter__form form" action="#">
+
+        <fieldset class="form__item gender">
+            <h2 class="gender__label" for="gender">Пол</h2>
+
+            <div class="gender__switcher switcher">
+
+                <label class="switcher__label" for="gender-male">
+                    <input class="switcher__input" id="gender-male" name="gender" value="male" type="radio" checked=""
+                           required="">
+                    <span class="switcher__text">Мужчина</span>
+                </label>
+
+
+                <label class="switcher__label" for="gender-female">
+                    <input class="switcher__input" id="gender-female" name="gender" value="female" type="radio"
+                           required="">
+                    <span class="switcher__text">Женщина</span>
+                </label>
+
+            </div>
+
+        </fieldset>
+
+        <fieldset class="form__item params">
+            <div class="params__block">
+                <div class="params__header">
+                    <label class="params__label" for="age">Возраст</label>
+                    <span class="params__unit">лет</span>
+                </div>
+                <input class="params__input text-input" placeholder="0" type="text" id="age">
+            </div>
+            <div class="params__block">
+                <div class="params__header">
+                    <label class="params__label" for="height">Рост</label>
+                    <span class="params__unit">лет</span>
+                </div>
+                <input class="params__input text-input" placeholder="0" type="text" id="height">
+            </div>
+            <div class="params__block">
+                <div class="params__header">
+                    <label class="params__label" for="weight">Вес</label>
+                    <span class="params__unit">лет</span>
+
+                </div>
+                <input class="params__input text-input" placeholder="0" type="text" id="weight">
+            </div>
+        </fieldset>
+
+        <fieldset class="form__item activ">
+            <legend class="activ__legend">Физическая активность</legend>
+            <ul class="activ__radios radios">
+
+                <li class="radios__item">
+                    <label class="radios__label label" for="xlow">
+                        <input class="radios__radio radio" type="radio" id="xlow" name="activ" value="low">
+                        <span class="radios__text">Минимальная</span>
+                    </label>
+                    <p class="radios__under-text"> Сидячая работа, нет физических нагрузок</p>
+                </li>
+
+                <li class="radios__item">
+                    <label class="radios__label label" for="low">
+                        <input class="radios__radio radio" type="radio" id="low" name="activ" value="low">
+                        <span class="radios__text">Низкая</span>
+                    </label>
+                    <p class="radios__under-text"> Редкие, нерегулярные тренировки, активность в быту
+
+                    </p>
+                </li>
+
+                <li class="radios__item">
+                    <label class="radios__label label" for="mid">
+                        <input class="radios__radio radio" type="radio" id="mid" name="activ" value="low">
+                        <span class="radios__text">Средняя</span>
+                    </label>
+                    <p class="radios__under-text"> Тренировки 3-5 раз в неделю
+
+                    </p>
+                </li>
+
+                <li class="radios__item">
+                    <label class="radios__label label" for="high">
+                        <input class="radios__radio radio" type="radio" id="high" name="activ" value="low">
+                        <span class="radios__text">Высокая</span>
+                    </label>
+                    <p class="radios__under-text"> Тренировки 6-7 раз в неделю</p>
+                </li>
+
+                <li class="radios__item">
+                    <label class="radios__label label" for="xhigh">
+                        <input class="radios__radio radio" type="radio" id="xhigh" name="activ" value="low">
+                        <span class="radios__text">Очень высокая</span>
+                    </label>
+                    <p class="radios__under-text"> Больше 6 тренировок в неделю и физическая работа</p>
+                </li>
+
+
+
+
+                <!--                <li><input type="radio" id="low" name="activ">-->
+                <!--                <li><input type="radio" id="med" name="activ">-->
+                <!--                <li><input type="radio" id="high" name="activ">-->
+                <!--                <li><input type="radio" id="extra" name="activ">-->
+            </ul>
+
+        </fieldset>
+
+        <section class="form__item buttons">
+            <button class="btn" type="submit">Рассчитать</button>
+            <button class="btn" type="reset">Очистить поля и рассчет</button>
+        </section>
+
+    </form>
+</main>
+<!--    <script src="js/jquery.js"></script>-->
+<script src="js/app.min.js"></script>
+</body>
+</html>
